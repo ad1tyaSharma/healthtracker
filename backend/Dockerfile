@@ -5,7 +5,7 @@ COPY . .
 RUN mvn clean package -DskipTests
 
 # Stage 2: Create a lightweight final image with JRE 21
-FROM openjdk:21-jre-slim
+FROM openjdk:21-slim
 WORKDIR /app
 
 # Copy the executable JAR from the build stage
