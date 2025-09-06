@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b0205053-47d4-4e22-a7e1-022cd963a4ae" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/src/main/resources/application.dev.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/example/healthtracker/security/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/example/healthtracker/security/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/healthtracker/auth/EmailService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/healthtracker/auth/EmailService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/healthtracker/auth/OAuth2SuccessHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/healthtracker/auth/OAuth2SuccessHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/healthtracker/controller/MemberController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/healthtracker/controller/MemberController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/healthtracker/jobs/MemberCleanupJob.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/healthtracker/jobs/MemberCleanupJob.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/healthtracker/jobs/TokenCleanupJob.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/healthtracker/jobs/TokenCleanupJob.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/com/example/healthtracker/security/SecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/com/example/healthtracker/security/SecurityConfig.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="32L1PHz2zVCNkFKdOEPOkowLTUl" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/adihg/OneDrive/Desktop/stuff/projects/health_tracker"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b0205053-47d4-4e22-a7e1-022cd963a4ae" name="Changes" comment="" />
+      <created>1757185013113</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1757185013113</updated>
+    </task>
+    <servers />
+  </component>
+</project>

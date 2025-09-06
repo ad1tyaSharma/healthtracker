@@ -19,11 +19,12 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.List;
-
+import org.springframework.beans.factory.annotation.Value;
 @Configuration
 @EnableMethodSecurity
 public class SecurityConfig {
-
+    @Value("${client.baseurl}")
+    private String clientUrl;
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final OAuth2SuccessHandler oauth2SuccessHandler;
 
@@ -70,7 +71,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         // Allow local frontend origins (add others as needed)
-        configuration.setAllowedOrigins(List.of("*"));
+        configuration.setAllowedOrigins(List.of(clientUrl, "http://localhost:3000", "http://localhost:5173"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
