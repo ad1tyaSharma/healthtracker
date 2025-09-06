@@ -53,6 +53,7 @@ export default function Dashboard() {
       if (res.data) setMembers(res.data as Member[])
       else setError(res.error || 'Failed to load members')
     }).catch(err => {
+      console.error('Error fetching members:', err)
       setLoading(false)
       setError('Failed to load members')
     })

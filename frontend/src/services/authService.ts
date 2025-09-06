@@ -28,8 +28,7 @@ export const authService = {
   },
   logout() {
   // clear server cookie
-  apiService.post('/auth/logout', {}).then((res) => {
-  })
+  apiService.post('/auth/logout', {})
   },
 
   getCurrentUser() {

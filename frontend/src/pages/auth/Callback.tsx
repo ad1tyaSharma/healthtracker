@@ -61,6 +61,8 @@ export default function Callback() {
   return (
     <div className="p-8 text-center">
       Redirecting...
+      {status && <p className="mt-4">{status}</p>}
+      {debug && <pre className="text-left mt-4 bg-gray-100 dark:bg-gray-800 p-4 rounded max-h-64 overflow-auto"><code>{JSON.stringify(debug, null, 2)}</code></pre>}
     </div>
   )
 }

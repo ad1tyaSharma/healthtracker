@@ -77,7 +77,7 @@ export default function AddRecordModal({
         return acc
       }, {} as Record<string, string>),
     }
-    apiService.post(`/members/${selectedMember}/records`, dataToSave).then(res => {
+    apiService.post(`/members/${selectedMember}/records`, dataToSave).then(() => {
     
       showToast('Record added successfully!', 'success')
       navigate(0) // refresh page to show new record

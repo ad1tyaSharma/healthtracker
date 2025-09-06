@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion'
 import { BiUser } from 'react-icons/bi'
 import ThemeToggle from '../ui/ThemeToggle'
-import { useAuth } from '../../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 export default function DashboardHeader() {
   const navigate = useNavigate();
