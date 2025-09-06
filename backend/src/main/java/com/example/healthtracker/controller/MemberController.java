@@ -24,7 +24,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @RequestMapping("/api/members")
 @CrossOrigin(origins = {"*"})
 public class MemberController {
-    @Value("${client.baseUrl}")
+    @Value("${client.baseurl}")
     private String clientUrl;
     private final MemberRepository memberRepository;
     private final UserRepository userRepository;

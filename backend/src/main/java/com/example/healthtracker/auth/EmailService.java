@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class EmailService {
-    @Value("${application.baseUrl}")
+    @Value("${application.baseurl}")
     private String baseUrl;
-    @Value("${client.baseUrl}")
+    @Value("${client.baseurl}")
     private String clientBaseUrl;
     @Autowired
     GmailEmailService gmailEmailService;

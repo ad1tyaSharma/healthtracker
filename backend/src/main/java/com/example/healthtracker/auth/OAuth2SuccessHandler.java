@@ -22,7 +22,7 @@ import java.util.Map;
 
 @Component
 public class OAuth2SuccessHandler implements AuthenticationSuccessHandler {
-    @Value("${client.baseUrl}")
+    @Value("${client.baseurl}")
     private String clientUrl;
     private final UserRepository userRepository;
     private final JwtService jwtService;
