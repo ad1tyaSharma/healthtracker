@@ -16,7 +16,7 @@ public class MemberCleanupJob {
     private MemberRepository memberRepository;
 
     // Run every day at midnight
-    @Scheduled(cron = "0 */1 * * * *")
+    @Scheduled(cron = "0 0 0 * * *")
     public void cleanupUnacceptedMembers() {
         Instant cutoff = Instant.now().minus(1, ChronoUnit.DAYS);
 

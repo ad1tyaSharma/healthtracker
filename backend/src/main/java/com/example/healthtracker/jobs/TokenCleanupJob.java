@@ -11,7 +11,7 @@ import java.time.Instant;
 public class TokenCleanupJob {
     @Autowired
     private EmailTokenRepository tokenRepository;
-    @Scheduled(cron = "0 */1 * * * *")
+    @Scheduled(cron = "0 0 * * * *")
     public void cleanupExpiredTokens() {
         Instant now = Instant.now();
         long count = tokenRepository.countByExpiresAtBefore(now);
