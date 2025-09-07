@@ -1,5 +1,6 @@
 package com.example.healthtracker.security;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,17 +15,19 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import com.example.healthtracker.auth.OAuth2SuccessHandler;
-import org.springframework.context.annotation.Bean;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
 import java.util.List;
-import org.springframework.beans.factory.annotation.Value;
+
 @Configuration
 @EnableMethodSecurity
 public class SecurityConfig {
+
     @Value("${client.baseurl}")
     private String clientUrl;
+
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final OAuth2SuccessHandler oauth2SuccessHandler;
 
@@ -36,17 +39,23 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .cors().and()
-            .csrf().disable()
-                        .authorizeHttpRequests()
-                            // Permit auth and OAuth endpoints (including the OAuth callback under /login/oauth2/**)
-                            .requestMatchers("/api/**", "/oauth2/**", "/oauth2/authorization/**", "/login/**", "/login/oauth2/**", "/error","/actuator/**" ).permitAll()
-              .anyRequest().authenticated()
-            .and()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and()
-            .oauth2Login().successHandler(oauth2SuccessHandler).and()
-            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Use our bean
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                                "/api/**",
+                                "/oauth2/**",
+                                "/oauth2/authorization/**",
+                                "/login/**",
+                                "/login/oauth2/**",
+                                "/error",
+                                "/actuator/**"
+                        ).permitAll()
+                        .anyRequest().authenticated()
+                )
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .oauth2Login(oauth2 -> oauth2.successHandler(oauth2SuccessHandler))
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
@@ -56,7 +65,7 @@ public class SecurityConfig {
         return config.getAuthenticationManager();
     }
 
-    // Simple in-memory user details for system operations (not used for real auth)
+    // Simple in-memory user details for system ops
     @Bean
     public UserDetailsService users() {
         UserDetails admin = User.withDefaultPasswordEncoder()
@@ -70,13 +79,19 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        // Allow local frontend origins (add others as needed)
-        configuration.setAllowedOrigins(List.of(clientUrl, "http://localhost:3000", "http://localhost:5173"));
+        
+        // CHANGED: Allow all origins with a wildcard
+        configuration.setAllowedOrigins(List.of("*"));
+        
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
-        configuration.setAllowCredentials(true);
+        
+        // REMOVED: You cannot allow credentials with a wildcard origin
+        // configuration.setAllowCredentials(true);
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/api/**", configuration);
+        source.registerCorsConfiguration("/**", configuration); // Apply globally
+
         return source;
     }
 }
