@@ -1,78 +1,125 @@
 # Family Health Tracker
 
-A centralized health tracking application for family members to monitor blood pressure, weight, sugar, and cholesterol measurements over time.
+Family Health Tracker is a modern, full-stack web application designed to help families monitor and manage key health metrics. It provides a centralized platform for tracking measurements like blood pressure, blood sugar, weight, and cholesterol, presented in an intuitive and visually appealing interface.
 
-## Features
+## ✨ Features
 
-- 🔒 **User Authentication**: Login, signup, Google sign-in, password reset flows
-- 📊 **Health Tracking**: Record and visualize health measurements with timestamps
-- 👨‍👩‍👧‍👦 **Family Management**: Add/view family members with detailed profiles
-- 📈 **Data Visualization**: Interactive time-series charts for health metrics
+- **Secure User Authentication**: Robust authentication including email/password signup, login, and password reset, with email verification.
+- **Google OAuth 2.0**: Seamless sign-in and signup using Google accounts.
+- **Family Member Management**: Easily add, view, and manage family members' profiles.
+- **Health Metric Tracking**: Log and monitor crucial health data points with timestamps.
+- **Interactive Data Visualization**: Dynamic charts to visualize health trends over time.
+- **Responsive Design**: Fully responsive interface for a seamless experience on any device.
+- **Dark Mode**: Switch between light and dark themes for personalized comfort.
 
-## Tech Stack
+## 🛠️ Tech Stack
 
-| Category          | Technology                     |
-|--------------------|---------------------------------|
-| Framework          | React                          |
-| Styling            | Tailwind CSS                   |
-| Data Fetching      | React Query                    |
-| Form Handling      | React Hook Form + Zod          |
-| Animations         | Framer Motion                  |
-| UI Components      | Headless UI / Radix primitives |
+### Frontend
 
-## Implementation Plan
+- **Framework**: [React](https://react.dev/)
+- **Language**: [TypeScript](https://www.typescriptlang.org/)
+- **Build Tool**: [Vite](https://vitejs.dev/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Routing**: [React Router](https://reactrouter.com/)
+- **State Management & Data Fetching**: [React Query](https://tanstack.com/query/latest)
+- **Form Handling**: [React Hook Form](https://react-hook-form.com/) with [Zod](https://zod.dev/) for validation
+- **UI Components**: [Radix UI](https://www.radix-ui.com/) & [Headless UI](https://headlessui.com/)
+- **Charting**: [Recharts](https://recharts.org/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
 
-We prioritize these milestones:
+### Backend
 
-1. **MVP (Milestone A)**:  
-   - Auth flows (login/signup)
-   - Dashboard with member cards (mocked)
-   - Member detail chart (mocked)
-   - Add-record modal (mocked)
+- **Framework**: [Spring Boot](https://spring.io/projects/spring-boot)
+- **Language**: Java 17
+- **Database**: [MongoDB](https://www.mongodb.com/)
+- **Authentication**: Spring Security with JWT
+- **API**: RESTful API
 
-2. **Milestone B**:  
-   - Backend integration
-   - Google login
-   - Email verification
+## 🚀 Getting Started
 
-3. **Milestone C**:  
-   - Polish UI animations
-   - CSV exports
-   - Reminders and notifications
+### Prerequisites
 
-## Component Breakdown
+- Java 17 or later
+- Maven
+- Node.js 18 or later
+- npm
+- MongoDB instance
 
-- **Pages**:
-  - `/auth/login`
-  - `/auth/signup`
-  - `/dashboard`
-  - `/account`
-  - `/members/:id`
+### Backend Setup
 
-- **Components**:
-  - `Header` (with user menu)
-  - `MemberCard` (avatar, name, health snapshot)
-  - `MemberList` (grid of member cards)
-  - `RecordModal` (add/edit medical record form)
-  - `RecordChart` (time-series chart with metric toggles)
-  - `AuthContext` (global authentication state)
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/your-username/health-tracker.git
+    cd health-tracker/backend
+    ```
 
-## Development Notes
+2.  **Configure the application:**
+    Open `src/main/resources/application.properties` and update the following properties:
+    - `spring.data.mongodb.uri`: Your MongoDB connection string.
+    - `app.jwt.secret`: A secure, 32+ character JWT secret.
+    - `spring.mail.host`, `spring.mail.port`, `spring.mail.username`, `spring.mail.password`: Your SMTP server details for sending emails.
+    - `spring.security.oauth2.client.registration.google.client-id` and `spring.security.oauth2.client.registration.google.client-secret`: Your Google OAuth2 credentials.
 
-- 🔒 **Security**: Secure token storage and rate limiting
-- 🛠️ **Validation**: Client-side validation using Zod
-- 🧑‍💻 **Accessibility**: Prioritized throughout development
-- 🚨 **Error Handling**: Robust error messaging for all user interactions
+3.  **Run the backend server:**
+    ```bash
+    mvn spring-boot:run
+    ```
+    The backend will be running at `http://localhost:8080`.
 
-## Getting Started
+### Frontend Setup
 
-1. Clone the repository
-2. Install dependencies: `npm install`
-3. Start development: `npm run dev`
+1.  **Navigate to the frontend directory:**
+    ```bash
+    cd ../frontend
+    ```
 
-## Contributing
-Pull requests are welcome! Please follow these guidelines:
-1. Create a new branch
-2. Make your changes
-3. Add tests if applicable
-4. Submit a pull request with clear description
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    ```
+
+3.  **Run the frontend development server:**
+    ```bash
+    npm run dev
+    ```
+    The frontend will be running at `http://localhost:5173`.
+
+## 📁 Project Structure
+
+```
+health-tracker/
+├── backend/
+│   ├── src/main/java/com/example/healthtracker/
+│   │   ├── auth/         # Authentication logic
+│   │   ├── config/       # Spring configurations
+│   │   ├── controller/   # REST API controllers
+│   │   ├── model/        # Data models
+│   │   ├── repository/   # Database repositories
+│   │   └── service/      # Business logic
+│   └── pom.xml           # Backend dependencies
+├── frontend/
+│   ├── src/
+│   │   ├── components/   # Reusable UI components
+│   │   ├── context/      # React contexts
+│   │   ├── hooks/        # Custom hooks
+│   │   ├── pages/        # Application pages
+│   │   ├── services/     # API service layer
+│   │   └── types/        # TypeScript types
+│   └── package.json      # Frontend dependencies
+└── README.md
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a pull request.
+
+1.  Fork the repository.
+2.  Create a new branch (`git checkout -b feature/your-feature`).
+3.  Make your changes.
+4.  Commit your changes (`git commit -m 'Add some feature'`).
+5.  Push to the branch (`git push origin feature/your-feature`).
+6.  Open a pull request.
+
+## 📄 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
