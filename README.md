@@ -26,9 +26,9 @@ We prioritize these milestones:
 
 1. **MVP (Milestone A)**:  
    - Auth flows (login/signup)
-   - Dashboard with member cards (mocked)
-   - Member detail chart (mocked)
-   - Add-record modal (mocked)
+   - Dashboard with member cards 
+   - Member detail chart 
+   - Add-record modal 
 
 2. **Milestone B**:  
    - Backend integration
