@@ -1,5 +1,6 @@
 package com.example.healthtracker.security;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +21,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
-
+@Slf4j
 @Configuration
 @EnableMethodSecurity
 public class SecurityConfig {
@@ -39,23 +40,23 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable())
-                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Use our bean
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(
-                                "/api/**",
-                                "/oauth2/**",
-                                "/oauth2/authorization/**",
-                                "/login/**",
-                                "/login/oauth2/**",
-                                "/error",
-                                "/actuator/**"
-                        ).permitAll()
-                        .anyRequest().authenticated()
-                )
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .oauth2Login(oauth2 -> oauth2.successHandler(oauth2SuccessHandler))
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+            .csrf(csrf -> csrf.disable())
+            .cors(cors -> cors.configurationSource(corsConfigurationSource())) // ✅ Use our bean
+            .authorizeHttpRequests(auth -> auth
+                    .requestMatchers(
+                            "/api/**",
+                            "/oauth2/**",
+                            "/oauth2/authorization/**",
+                            "/login/**",
+                            "/login/oauth2/**",
+                            "/error",
+                            "/actuator/**"
+                    ).permitAll()
+                    .anyRequest().authenticated()
+            )
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .oauth2Login(oauth2 -> oauth2.successHandler(oauth2SuccessHandler))
+            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
@@ -79,18 +80,17 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        
-        // CHANGED: Allow all origins with a wildcard
-        configuration.setAllowedOrigins(List.of("*"));
+        log.info("ClientUrl {}",clientUrl);
+        // ✅ Use patterns instead of exact origins
+        configuration.setAllowedOriginPatterns(List.of(clientUrl, "http://localhost:*", "http://127.0.0.1:*"));
         
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
-        
-        // REMOVED: You cannot allow credentials with a wildcard origin
-        // configuration.setAllowCredentials(true);
+        configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration); // Apply globally
+        // ✅ Apply globally, not just /api/**
+        source.registerCorsConfiguration("/**", configuration);
 
         return source;
     }
