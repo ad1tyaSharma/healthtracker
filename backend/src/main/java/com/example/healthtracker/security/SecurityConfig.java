@@ -80,17 +80,18 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        log.info("ClientUrl {}",clientUrl);
-        // ✅ Use patterns instead of exact origins
-        configuration.setAllowedOriginPatterns(List.of(clientUrl, "http://localhost:*", "http://127.0.0.1:*"));
-        
+
+        // ✅ CHANGED: Replaced wildcard with the specific frontend origin
+        configuration.setAllowedOrigins(List.of(clientUrl));
+
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
+
+        // ✅ ADDED: Explicitly allow credentials now that the origin is specific
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        // ✅ Apply globally, not just /api/**
-        source.registerCorsConfiguration("/**", configuration);
+        source.registerCorsConfiguration("/**", configuration); // Apply this configuration to all paths
 
         return source;
     }
